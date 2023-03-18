@@ -20,5 +20,68 @@ export default {
 		module: "Text",
 		name: "Text"
 	}
-  }
+  },
+rpc:{
+    estimateGasExecute: {
+      aliasSection: "mvm",
+      description: "estimate gas for script execution",
+      params: [
+        {
+          name: "account",
+          type: "AccountId"
+        },
+        {
+          name: "tx_bc",
+          type: "Bytes"
+        },
+        {
+          name: "gas_limit",
+          type: "u64"
+        }
+      ],
+      type: "Estimation"
+    },
+    estimateGasPublish: {
+      aliasSection: "mvm",
+      description: "estimate gas for module publishing",
+      params: [
+        {
+          name: "account",
+          type: "AccountId"
+        },
+        {
+          name: "module_bc",
+          type: "Bytes"
+        },
+        {
+          name: "gas_limit",
+          type: "u64"
+        }
+      ],
+      type: "Estimation"
+    },
+    gasToWeight: {
+      aliasSection: "mvm",
+      description: "convert gas to weight",
+      params: [
+        {
+          name: "gas",
+          type: "u64"
+        }
+      ],
+      type: "u64"
+    },
+    weightToGas: {
+      aliasSection: "mvm",
+      description: "convert gas to weight",
+      params: [
+        {
+          name: "weight",
+          type: "u64"
+        }
+      ],
+      type: "u64"
+    }
+  
+}
 }
