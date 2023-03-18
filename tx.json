@@ -1,0 +1,91 @@
+{
+  "executeScriptFunction": {
+    "name": "execute_script_function",
+    "fields": [
+      {
+        "name": "module_address",
+        "type": 0,
+        "typeName": "T::AccountId",
+        "docs": []
+      },
+      { "name": "module_name", "type": 12, "typeName": "Vec<u8>", "docs": [] },
+      { "name": "ty_args", "type": 12, "typeName": "Vec<u8>", "docs": [] },
+      { "name": "args", "type": 12, "typeName": "Vec<u8>", "docs": [] },
+      { "name": "gas_limit", "type": 10, "typeName": "u64", "docs": [] }
+    ],
+    "index": 0,
+    "docs": [
+      "Execute Move script function.",
+      "",
+      "User can send his Move script function for execution by Move VM.",
+      "The gas limit should be provided."
+    ],
+    "args": [
+      {
+        "name": "moduleAddress",
+        "type": "AccountId32",
+        "typeName": "AccountId"
+      },
+      { "name": "moduleName", "type": "Bytes", "typeName": "Bytes" },
+      { "name": "tyArgs", "type": "Bytes", "typeName": "Bytes" },
+      { "name": "args", "type": "Bytes", "typeName": "Bytes" },
+      { "name": "gasLimit", "type": "u64", "typeName": "u64" }
+    ]
+  },
+  "execute": {
+    "name": "execute",
+    "fields": [
+      { "name": "tx_bc", "type": 12, "typeName": "Vec<u8>", "docs": [] },
+      { "name": "gas_limit", "type": 10, "typeName": "u64", "docs": [] }
+    ],
+    "index": 1,
+    "docs": [
+      "Execute Move script.",
+      "",
+      "User can send his Move script (compiled using 'dove call' command) for execution by Move VM.",
+      "The gas limit should be provided."
+    ],
+    "args": [
+      { "name": "txBc", "type": "Bytes", "typeName": "Bytes" },
+      { "name": "gasLimit", "type": "u64", "typeName": "u64" }
+    ]
+  },
+  "publishModule": {
+    "name": "publish_module",
+    "fields": [
+      { "name": "module_bc", "type": 12, "typeName": "Vec<u8>", "docs": [] },
+      { "name": "gas_limit", "type": 10, "typeName": "u64", "docs": [] }
+    ],
+    "index": 2,
+    "docs": [
+      "Publish Move module.",
+      "",
+      "User can publish his Move module under his address.",
+      "The gas limit should be provided."
+    ],
+    "args": [
+      { "name": "moduleBc", "type": "Bytes", "typeName": "Bytes" },
+      { "name": "gasLimit", "type": "u64", "typeName": "u64" }
+    ]
+  },
+  "publishPackage": {
+    "name": "publish_package",
+    "fields": [
+      { "name": "package", "type": 12, "typeName": "Vec<u8>", "docs": [] },
+      { "name": "gas_limit", "type": 10, "typeName": "u64", "docs": [] }
+    ],
+    "index": 3,
+    "docs": [
+      "Publish module package (could be generated using 'dove build -b'), e.g.: several modules in one transaction.",
+      "",
+      "Deploy several modules in one transaction. Could be called by root in case needs to update Standard Library.",
+      "Read more about Standard Library - https://docs.pontem.network/03.-move-vm/stdlib",
+      "The gas limit should be provided.",
+      "TODO: maybe we should replace it with publish_package, yet i'm currently not sure, as user anyway paying for transaction bytes."
+    ],
+    "args": [
+      { "name": "package", "type": "Bytes", "typeName": "Bytes" },
+      { "name": "gasLimit", "type": "u64", "typeName": "u64" }
+    ]
+  }
+}

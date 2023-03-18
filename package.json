@@ -17,8 +17,6 @@
 		"lint": "eslint . --ext .ts --fix",
 		"format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
 	},
-	"author": "@kianenigma",
-	"license": "ISC",
 	"devDependencies": {
 		"@babel/cli": "^7.20.7",
 		"@babel/core": "^7.20.12",

@@ -1,24 +1,36 @@
 {
+    "include": [
+        "./src/**/*",
+        "./node_modules/types-bn/index.d.ts",
+    ],
+    "exclude": [
+        "node_modules/**/*",
+    ],
+    "skipLibCheck": true,
     "compilerOptions": {
-        "target": "es2022",
+        "skipLibCheck": true,
+        "outDir": "lib",
+        "noImplicitThis": false,
         "module": "commonjs",
-        "lib": [
-            "es6"
+        "target": "es2020",
+        "typeRoots": [
+            "./typings"
         ],
-        "allowJs": true,
-        "outDir": "build",
-        "rootDir": "src",
-        "baseUrl": "./src",
-        // Some compiling checks.
-        "strict": true,
-        "noImplicitAny": true,
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
-        "strictPropertyInitialization": true,
-        "noImplicitThis": true,
-        "alwaysStrict": true,
+        "types": [
+           "node"
+        ],
+        "lib": [
+            "es2020",
+            "dom"
+        ],
+        "declaration": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "noImplicitReturns": true,
+        "pretty": true,
+        "baseUrl": ".",
         "paths": {
-            "@polkadot/types/lookup": ["move-api/interfaces/types-lookup"]
+            // "@polkadot/types/lookup": ["move-api/interfaces/types-lookup"],
             // "move-api/*": [
             //     "src/*"
             // ],
@@ -29,10 +41,5 @@
             //     "src/interfaces/augment-types.ts"
             // ]
         },
-        // dep resolution
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-        "experimentalDecorators": true,
-        "resolveJsonModule": true
     }
 }
