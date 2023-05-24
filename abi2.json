@@ -1,0 +1,59 @@
+{
+  "bytecode": "0xa11ceb0b040000000801000a020a04030e4a045804055c1e077ab70108b102400cf10294010000010100020003000404100f00000500010000060001010000070001000008000101000009010100000a020100040b040100010c050600040d060300020e070100040f04010100041106090003120203000213040101000a080d08030c030300020303010303060c030301060c010502060c030109000108000a536372697074426f6f6b065369676e65720a4576656e7450726f7879044d6174680753746f726167650e73746f72655f73756d5f66756e630f73746f72655f73756d5f66756e63740873756d5f66756e630973756d5f66756e637404746573740574657374320973746f72655f73756d0a616464726573735f6f66076765745f73756d0a656d69745f6576656e740a73746f72655f73756d740353756d086765745f73756d74036164640b656d69745f6576656e7474d43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d00000000000000000000000000000000000000000000000000000000000000010002000003140e000a010a0211060e00110711080c030e000a0311090b010b02160b0321031306650000000000000027020102000001090e000b010b0238000e001107110b01020202000003080b010b02110c0c030e000b031109020302000001050e000b010b02380102040200000101020502000001090b000b0116060500000000000000210308066500000000000000270200",
+  "abi": {
+    "address": "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d",
+    "name": "ScriptBook",
+    "friends": [],
+    "exposed_functions": [
+      {
+        "name": "store_sum_func",
+        "visibility": "script",
+        "is_entry": true,
+        "generic_type_params": [],
+        "params": ["signer", "u64", "u64"],
+        "return": []
+      },
+      {
+        "name": "store_sum_funct",
+        "visibility": "script",
+        "is_entry": true,
+        "generic_type_params": [{ "constraints": [] }],
+        "params": ["signer", "u64", "u64"],
+        "return": []
+      },
+      {
+        "name": "sum_func",
+        "visibility": "script",
+        "is_entry": true,
+        "generic_type_params": [],
+        "params": ["signer", "u64", "u64"],
+        "return": []
+      },
+      {
+        "name": "sum_funct",
+        "visibility": "script",
+        "is_entry": true,
+        "generic_type_params": [{ "constraints": [] }],
+        "params": ["signer", "u64", "u64"],
+        "return": []
+      },
+      {
+        "name": "test",
+        "visibility": "script",
+        "is_entry": true,
+        "generic_type_params": [],
+        "params": [],
+        "return": []
+      },
+      {
+        "name": "test2",
+        "visibility": "script",
+        "is_entry": true,
+        "generic_type_params": [],
+        "params": ["u64", "u64"],
+        "return": []
+      }
+    ],
+    "structs": []
+  }
+}
