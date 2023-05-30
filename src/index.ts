@@ -150,7 +150,7 @@ async function main() {
     }
     if (options.getTableEntry) {
         console.log("========options.getTableEntry====", options.getTableEntry)
-        await getTableEntry("132692409849679358887631062327771453437","1","u64","0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d::TodoList::Task",api)
+        await getTableEntry("132692409849679358887631062327771453437", "1", "u64", "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d::TodoList::Task", api)
     }
     // await gasToWeight(api);
 }
@@ -160,11 +160,6 @@ async function createList(api: ApiPromise) {
     const tx = await buildCreateListTx(abi);
     await execute(tx, api);
     const keyring = new Keyring({ type: 'sr25519' });
-
-    //// Add Alice to our keyring with a hard-derivation path (empty phrase, so uses dev)
-    const alice = keyring.addFromUri('//Alice');
-    await getResource(alice.address, "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d::TodoList::TodoList", api)
-
 }
 async function buildCreateListTx(abi: string) {
     const rawTxn = await TransactionBuilderRemoteABI.build(abi,
@@ -179,12 +174,6 @@ async function createTask(api: ApiPromise) {
     const abi = await getAbi("0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d::TodoList::create_task", api)
     const tx = await buildCreateTaskTx(abi);
     await execute(tx, api);
-    const keyring = new Keyring({ type: 'sr25519' });
-
-    //// Add Alice to our keyring with a hard-derivation path (empty phrase, so uses dev)
-    const alice = keyring.addFromUri('//Alice');
-    await getResource(alice.address, "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d::TodoList::TodoList", api)
-
 }
 async function buildCreateTaskTx(abi: string) {
     const rawTxn = await TransactionBuilderRemoteABI.build(abi,
@@ -199,12 +188,6 @@ async function completeTask(api: ApiPromise) {
     const abi = await getAbi("0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d::TodoList::complete_task", api)
     const tx = await buildCompleteTaskTx(abi);
     await execute(tx, api);
-    const keyring = new Keyring({ type: 'sr25519' });
-
-    //// Add Alice to our keyring with a hard-derivation path (empty phrase, so uses dev)
-    const alice = keyring.addFromUri('//Alice');
-    await getResource(alice.address, "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d::TodoList::TodoList", api)
-
 }
 async function buildCompleteTaskTx(abi: string) {
     const rawTxn = await TransactionBuilderRemoteABI.build(abi,
@@ -264,15 +247,28 @@ async function convertModuleId(func: string) {
     return HexString.fromUint8Array(BCS.bcsToBytes(ModuleId.fromStr(`${addr}::${module}`))).hex()
 }
 async function getResource(address: string, tag: string, api: ApiPromise) {
+    // {"type":"D43593C715FDD31C61141ABD04A99FD6822C8558854CCDE39A5684E7A56DA27D::TodoList::TodoList","data":{"set_task_event":{"counter":1,"guid":{"guid":{"id":{"addr":[212,53,147,199,21,253,211,28,97,20,26,189,4,169,159,214,130,44,133,88,133,76,205,227,154,86,132,231,165,109,162,125],"creation_num":0}},"len_bytes":40}},"task_counter":1,"tasks":{"handle":"132692409849679358887631062327771453437"}}}
     const tagHexStr = stringToHex(tag);
     const un = await api.rpc["mvm"]["getResources3"](address, tagHexStr);
-    console.log("======getResource==hexToString=======", hexToString(JSON.stringify(un).slice(3)))
-    return hexToString(JSON.stringify(un).slice(3))
+    let resphex = JSON.stringify(un);
+    let s = hexToString(JSON.parse(JSON.stringify(un)))
+    let json = JSON.parse(s);
+    // console.log("=====addr=====", json.data.set_task_event.guid.guid.id.addr);
+    // console.log("=====addr==hex===", u8aToHex(json.data.set_task_event.guid.guid.id.addr));
+    // console.log(json, "======getResource==hexToString=======", s)
+    return s
 }
 async function getTableEntry(handle: string, key: string, key_type: string, value_type: string, api: ApiPromise) {
+    // {"address":[212,53,147,199,21,253,211,28,97,20,26,189,4,169,159,214,130,44,133,88,133,76,205,227,154,86,132,231,165,109,162,125],"completed":false,"content":"0x424242","task_id":1}
     const un = await api.rpc["mvm"]["getTableEntry"](stringToHex(handle), stringToHex(key), stringToHex(key_type), stringToHex(value_type));
-    console.log("======getTableEntry==hexToString=======", hexToString(JSON.stringify(un).slice(3)))
-    return hexToString(JSON.stringify(un).slice(3))
+    let s = hexToString(JSON.parse(JSON.stringify(un)))
+    let json = JSON.parse(s);
+    json.address=u8aToHex(json.address)
+    json.content= hexToString(json.content)
+    // console.log("=====address==hex===", u8aToHex(json.address));
+    // console.log("=====content==string===", hexToString(json.content));
+    // console.log(json, "======getTableEntry==hexToString=======", s)
+    return json
 }
 async function getAbi(func: string, api: ApiPromise) {
     const moduleId = await convertModuleId(func);
