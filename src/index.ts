@@ -146,12 +146,14 @@ async function main() {
 
         //// Add Alice to our keyring with a hard-derivation path (empty phrase, so uses dev)
         const alice = keyring.addFromUri('//Alice');
-        await getResource(alice.address, "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d::TodoList::TodoList", api)
+        const s=await getResource(alice.address, "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d::TodoList::TodoList", api)
+        console.log("======res=====",s);
     }
     if (options.getTableEntry) {
         console.log("========options.getTableEntry====", options.getTableEntry)
-        await getTableEntry("132692409849679358887631062327771453437", "1", "u64", "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d::TodoList::Task", api)
-    }
+        const s=await getTableEntry("132692409849679358887631062327771453437", "1", "u64", "0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d::TodoList::Task", api)
+        console.log("======tab=====",s);
+     }
     // await gasToWeight(api);
 }
 
